@@ -1,0 +1,35 @@
+apiVersion: 'nais.io/v1alpha1'
+kind: 'Application'
+metadata:
+  name: flex-openapi-docs-ui
+  namespace: flex
+  labels:
+    team: flex
+spec:
+  image: {{image}}
+  port: 8080
+  ingresses:
+    - https://www.ekstern.dev.nav.no/flex-openapi-docs
+  replicas:
+    min: 1
+    max: 2
+    cpuThresholdPercentage: 90
+
+  resources:
+    limits:
+      memory: 350Mi
+    requests:
+      cpu: 100m
+      memory: 350Mi
+  liveness:
+    path: /api/internal/isAlive
+  readiness:
+    path: /api/internal/isAlive
+  startup:
+    path: /api/internal/isAlive
+    initialDelay: 10
+
+  filesFrom:
+    - emptyDir:
+        medium: Memory
+      mountPath: /app/.next/cache
