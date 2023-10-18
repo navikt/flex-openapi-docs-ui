@@ -1,4 +1,3 @@
-import '../../styles/globals.css'
 import { ReactElement } from 'react'
 
 export default async function RootLayout({ children }: { children: React.ReactNode }): Promise<ReactElement> {
