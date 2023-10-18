@@ -1,0 +1,12 @@
+FROM gcr.io/distroless/nodejs18-debian12@sha256:c2de6dd6f5f8ddbfc977b1f16b5a121017f3bf11e9993baa922aa18322c2bf24
+
+ENV NODE_ENV production
+
+COPY /next.config.js ./
+COPY /.next ./.next
+COPY /node_modules ./node_modules
+COPY /public ./public
+
+ENV PORT=8080
+
+CMD ["./node_modules/next/dist/bin/next", "start"]
