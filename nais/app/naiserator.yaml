@@ -33,3 +33,9 @@ spec:
     - emptyDir:
         medium: Memory
       mountPath: /app/.next/cache
+  accessPolicy:
+    outbound:
+      rules:
+        - application: sykepengesoknad-backend
+        - application: spinnsyn-backend
+        - application: ditt-sykefravaer-backend

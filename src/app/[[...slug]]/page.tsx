@@ -25,7 +25,7 @@ export default async function ApiDocs(): Promise<ReactElement> {
         },
     }
 
-    const backendSpecs = openApiSpecs()
+    const backendSpecs = await openApiSpecs()
     for (const k in backendSpecs.sykepengesoknadFrontend.paths) {
         spec.paths!['/syk/sykepengesoknad/api/sykepengesoknad-backend' + k] =
             backendSpecs.sykepengesoknadFrontend.paths[k]
@@ -37,14 +37,20 @@ export default async function ApiDocs(): Promise<ReactElement> {
     return <SwaggerUI spec={spec} />
 }
 
-function openApiSpecs(): Specs {
+async function openApiSpecs(): Promise<Specs> {
     if (isLocalOrDemo) {
         return {
             sykepengesoknadFrontend: testdata,
         }
     }
+
+    const a = await fetch(`http://sykepengesoknad-backend/v3/api-docs`, {
+        next: { revalidate: 3600 },
+    })
+    const sykepengesoknadFrontend = await a.json()
+
     return {
-        sykepengesoknadFrontend: testdata,
+        sykepengesoknadFrontend,
     }
 }
 
