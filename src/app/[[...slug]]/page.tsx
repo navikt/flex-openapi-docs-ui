@@ -26,6 +26,7 @@ export default async function ApiDocs(): Promise<ReactElement> {
         components: {
             schemas: {},
         },
+        tags: [],
     }
 
     const backendSpecs = await openApiSpecs()
@@ -36,6 +37,9 @@ export default async function ApiDocs(): Promise<ReactElement> {
         }
         for (const k in specs.components?.schemas) {
             spec.components!.schemas![k] = specs.components.schemas[k]
+        }
+        for (const k of specs.tags || []) {
+            spec.tags!.push(k)
         }
     }
 
