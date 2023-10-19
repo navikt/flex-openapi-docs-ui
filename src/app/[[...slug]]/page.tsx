@@ -14,7 +14,7 @@ export default async function ApiDocs(): Promise<ReactElement> {
             title: 'Team Flex nav.no APIer',
             version: '1',
             description:
-                'Her ser du alle APIer som team flex sine applikasjoner eksponerer ut på nav.no. <br /><br />  Denne dokumentasjonen gjører på samme domene som testmiljøet, slik at innlogging og CORS er så enkelt som mulig. For å være autentisert så logger du inn på  [Ditt Sykefravær](https://www.ekstern.dev.nav.no/syk/sykefravaer/) i testmiljøet i samme nettleser som du ser på denne siden. Da vil det opprettes en sesjon med en cookie som automatisk gjenbrukes dersom du bruker APIene på denne siden.',
+                'Her ser du alle APIer som team flex sine applikasjoner eksponerer ut på nav.no. <br /><br />  Denne dokumentasjonen kjører på samme domene som testmiljøet, slik at innlogging og CORS er så enkelt som mulig. For å være autentisert så logger du inn på  [Ditt Sykefravær](https://www.ekstern.dev.nav.no/syk/sykefravaer/) i testmiljøet i samme nettleser som du ser på denne siden. Da vil det opprettes en sesjon med en cookie som automatisk gjenbrukes dersom du bruker APIene på denne siden.',
         },
         servers: [
             {
