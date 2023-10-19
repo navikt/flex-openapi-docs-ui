@@ -1,6 +1,7 @@
 import { ReactElement } from 'react'
 
 import 'swagger-ui-react/swagger-ui.css'
+
 import { SwaggerUI } from '@/components/clientSwaggerUi'
 import { testdata } from '@/testdata/testdata'
 import { OpenAPI3 } from '@/types'
@@ -26,13 +27,18 @@ export default async function ApiDocs(): Promise<ReactElement> {
     }
 
     const backendSpecs = await openApiSpecs()
-    for (const k in backendSpecs.sykepengesoknadFrontend.paths) {
-        spec.paths!['/syk/sykepengesoknad/api/sykepengesoknad-backend' + k] =
-            backendSpecs.sykepengesoknadFrontend.paths[k]
+
+    function parseSpecs(specs: OpenAPI3, prefix: string): void {
+        for (const k in specs.paths) {
+            spec.paths![prefix + k] = specs.paths[k]
+        }
+        for (const k in specs.components?.schemas) {
+            spec.components!.schemas![k] = specs.components.schemas[k]
+        }
     }
-    for (const k in backendSpecs.sykepengesoknadFrontend.components?.schemas) {
-        spec.components!.schemas![k] = backendSpecs.sykepengesoknadFrontend.components.schemas[k]
-    }
+    parseSpecs(backendSpecs.spinnsynBackend, '/syk/sykepenger/api/spinnsyn-backend')
+    parseSpecs(backendSpecs.dittSykefravaerBackend, '/syk/sykefravaer/api/ditt-sykefravaer-backend')
+    parseSpecs(backendSpecs.sykepengesoknadBackend, '/syk/sykepengesoknad/api/sykepengesoknad-backend')
 
     return <SwaggerUI spec={spec} />
 }
@@ -40,20 +46,29 @@ export default async function ApiDocs(): Promise<ReactElement> {
 async function openApiSpecs(): Promise<Specs> {
     if (isLocalOrDemo) {
         return {
-            sykepengesoknadFrontend: testdata,
+            sykepengesoknadBackend: testdata,
+            spinnsynBackend: testdata,
+            dittSykefravaerBackend: testdata,
         }
     }
 
-    const a = await fetch(`http://sykepengesoknad-backend/v3/api-docs`, {
-        next: { revalidate: 3600 },
-    })
-    const sykepengesoknadFrontend = await a.json()
+    async function fetchApiDocs(app: string): Promise<OpenAPI3> {
+        return await (
+            await fetch(`http://${app}/v3/api-docs`, {
+                next: { revalidate: 3600 },
+            })
+        ).json()
+    }
 
     return {
-        sykepengesoknadFrontend,
+        sykepengesoknadBackend: await fetchApiDocs('sykepengesoknad-backend'),
+        spinnsynBackend: await fetchApiDocs('spinnsyn-backend'),
+        dittSykefravaerBackend: await fetchApiDocs('ditt-sykefravaer-backend'),
     }
 }
 
 interface Specs {
-    sykepengesoknadFrontend: OpenAPI3
+    sykepengesoknadBackend: OpenAPI3
+    spinnsynBackend: OpenAPI3
+    dittSykefravaerBackend: OpenAPI3
 }
