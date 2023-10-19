@@ -39,3 +39,4 @@ spec:
         - application: sykepengesoknad-backend
         - application: spinnsyn-backend
         - application: ditt-sykefravaer-backend
+        - application: sykepengesoknad-kvitteringer

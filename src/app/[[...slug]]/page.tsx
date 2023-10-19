@@ -39,6 +39,7 @@ export default async function ApiDocs(): Promise<ReactElement> {
     parseSpecs(backendSpecs.spinnsynBackend, '/syk/sykepenger/api/spinnsyn-backend')
     parseSpecs(backendSpecs.dittSykefravaerBackend, '/syk/sykefravaer/api/ditt-sykefravaer-backend')
     parseSpecs(backendSpecs.sykepengesoknadBackend, '/syk/sykepengesoknad/api/sykepengesoknad-backend')
+    parseSpecs(backendSpecs.sykepengesoknadKvitteringer, '/syk/sykepengesoknad/api/sykepengesoknad-kvitteringer')
 
     return <SwaggerUI spec={spec} />
 }
@@ -49,6 +50,7 @@ async function openApiSpecs(): Promise<Specs> {
             sykepengesoknadBackend: testdata,
             spinnsynBackend: testdata,
             dittSykefravaerBackend: testdata,
+            sykepengesoknadKvitteringer: testdata,
         }
     }
 
@@ -64,6 +66,7 @@ async function openApiSpecs(): Promise<Specs> {
         sykepengesoknadBackend: await fetchApiDocs('sykepengesoknad-backend'),
         spinnsynBackend: await fetchApiDocs('spinnsyn-backend'),
         dittSykefravaerBackend: await fetchApiDocs('ditt-sykefravaer-backend'),
+        sykepengesoknadKvitteringer: await fetchApiDocs('sykepengesoknad-kvitteringer'),
     }
 }
 
@@ -71,4 +74,5 @@ interface Specs {
     sykepengesoknadBackend: OpenAPI3
     spinnsynBackend: OpenAPI3
     dittSykefravaerBackend: OpenAPI3
+    sykepengesoknadKvitteringer: OpenAPI3
 }
