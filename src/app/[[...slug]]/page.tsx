@@ -64,7 +64,7 @@ async function openApiSpecs(): Promise<Specs> {
     async function fetchApiDocs(app: string): Promise<OpenAPI3> {
         return await (
             await fetch(`http://${app}/v3/api-docs`, {
-                next: { revalidate: 3600 },
+                next: { revalidate: 60 },
             })
         ).json()
     }
