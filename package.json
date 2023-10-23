@@ -24,7 +24,7 @@
         "typescript": "5.2.2"
     },
     "devDependencies": {
-        "@navikt/eslint-config-teamsykmelding": "^4.4.0",
+        "@navikt/eslint-config-teamsykmelding": "^4.5.0",
         "@types/swagger-ui-react": "^4.18.1",
         "eslint": "8.51.0",
         "eslint-config-next": "13.5.5"
