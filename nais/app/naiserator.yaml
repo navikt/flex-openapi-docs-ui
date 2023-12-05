@@ -9,7 +9,7 @@ spec:
   image: {{image}}
   port: 8080
   ingresses:
-    - https://www.ekstern.dev.nav.no/flex-openapi-docs-ui
+    - {{ingress}}
   replicas:
     min: 1
     max: 2
