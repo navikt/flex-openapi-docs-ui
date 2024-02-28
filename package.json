@@ -17,7 +17,7 @@
         "format": "npm run prettier:write && npm run lint:fix"
     },
     "dependencies": {
-        "@types/node": "20.10.4",
+        "@types/node": "20.11.21",
         "@types/react": "18.2.55",
         "@types/react-dom": "18.2.19",
         "next": "14.1.0",
