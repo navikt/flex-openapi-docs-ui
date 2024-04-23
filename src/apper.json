@@ -21,7 +21,6 @@
     { "name": "flex-trello-docs" },
     { "name": "sykepengesoknad-narmesteleder-varsler" },
     { "name": "flex-sykepengesoknad-pdfgen" },
-    { "name": "sykepengesoknad-sak-status-metrikk" },
     { "name": "flexjar-backend" },
     { "name": "flex-bigquery-soda" },
     { "name": "sykepengesoknad-kafka" },
